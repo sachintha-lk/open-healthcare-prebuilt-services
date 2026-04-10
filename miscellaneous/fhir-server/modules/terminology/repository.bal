@@ -26,7 +26,7 @@ import ballerina/log;
 
 public isolated function readResourceJsonById(jdbc:Client jdbcClient, string resourceType, string id) returns json|error {
     log:printDebug("Reading resource JSON by ID", resourceType = resourceType, id = id);
-    string tableName = utils:getTableName(resourceType);
+    string tableName = check utils:getTableName(resourceType);
     string primaryKey = utils:getPrimaryKeyColumn(resourceType);
     string sqlQuery = string `SELECT "RESOURCE_JSON" FROM "${tableName}" WHERE "${primaryKey}" = '${utils:escapeSql(id)}'`;
     sql:ParameterizedQuery query = new utils:RawSQLQuery(sqlQuery);
@@ -43,7 +43,7 @@ public isolated function readResourceJsonById(jdbc:Client jdbcClient, string res
 }
 
 public isolated function readResourceJsonByColumn(jdbc:Client jdbcClient, string resourceType, string columnName, string value) returns json|error {
-    string tableName = utils:getTableName(resourceType);
+    string tableName = check utils:getTableName(resourceType);
     string safeColumn = check getWhitelistedColumnName(resourceType, columnName);
     string sqlQuery = string `SELECT "RESOURCE_JSON" FROM "${tableName}" WHERE "${safeColumn}" = '${utils:escapeSql(value)}' LIMIT 1`;
     sql:ParameterizedQuery query = new utils:RawSQLQuery(sqlQuery);

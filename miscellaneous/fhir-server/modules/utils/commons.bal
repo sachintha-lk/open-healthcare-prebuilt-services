@@ -159,7 +159,7 @@ public isolated function deleteResource(jdbc:Client? jdbcClient, string resource
     jdbc:Client validatedClient = check getValidatedJdbcClient(jdbcClient);
 
     // Get table name and primary key column
-    string tableName = getTableName(resourceType);
+    string tableName = check getTableName(resourceType);
     string primaryKeyColumn = getPrimaryKeyColumn(resourceType);
     
     // Build DELETE query with escaped resourceId

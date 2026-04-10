@@ -22,7 +22,7 @@ public class ReadMapper {
             return error("JDBC client is not initialized");
         }
 
-        string tableName = utils:getTableName(resourceType);
+        string tableName = check utils:getTableName(resourceType);
         string primaryKey = utils:getPrimaryKeyColumn(resourceType);
 
         string sqlQuery = string `SELECT "RESOURCE_JSON", "VERSION_ID", "LAST_UPDATED" FROM "${tableName}" WHERE "${primaryKey}" = '${utils:escapeSql(resourceId)}'`;
@@ -71,7 +71,7 @@ public class ReadMapper {
         }
 
         // Get table columns to validate search parameters
-        string tableName = utils:getTableName(resourceType);
+        string tableName = check utils:getTableName(resourceType);
         string[] tableColumns = check mapperUtils:getTableColumns(jdbcClient, tableName);
 
         // First, check if there are any custom extension search parameters
@@ -674,7 +674,7 @@ public class ReadMapper {
             return error("JDBC client is not initialized");
         }
 
-        string tableName = utils:getTableName(resourceType);
+        string tableName = check utils:getTableName(resourceType);
         string primaryKey = utils:getPrimaryKeyColumn(resourceType);
 
         int totalCount = 0;
@@ -787,7 +787,7 @@ public class ReadMapper {
             return error("JDBC client is not initialized");
         }
 
-        string tableName = utils:getTableName(resourceType);
+        string tableName = check utils:getTableName(resourceType);
 
         string sqlQuery = string `SELECT COUNT(*) AS "COUNT" FROM "${tableName}"`;
         sql:ParameterizedQuery query = new RawSQLQuery(sqlQuery);
@@ -807,7 +807,7 @@ public class ReadMapper {
             return error("JDBC client is not initialized");
         }
 
-        string tableName = utils:getTableName(resourceType);
+        string tableName = check utils:getTableName(resourceType);
         string primaryKey = utils:getPrimaryKeyColumn(resourceType);
 
         string sqlQuery = string `SELECT "${primaryKey}", "VERSION_ID", "LAST_UPDATED", "CREATED_AT" FROM "${tableName}" WHERE "${primaryKey}" = '${utils:escapeSql(resourceId)}'`;

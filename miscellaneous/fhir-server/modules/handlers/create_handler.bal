@@ -150,7 +150,7 @@ public class CreateHandler {
     private isolated function saveMainResource(string resourceType, record {|anydata...;|} insertModel) returns string|error {
         
         // Get table name
-        string tableName = mapperUtils:getTableName(resourceType);
+        string tableName = check mapperUtils:getTableName(resourceType);
         log:printDebug(string `Target table for ${resourceType}: ${tableName}`);
         
         // Validate JDBC client

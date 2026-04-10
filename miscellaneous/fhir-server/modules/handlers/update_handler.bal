@@ -306,7 +306,7 @@ public class UpdateHandler {
             return error("JDBC client not initialized");
         }
 
-        string tableName = utils:getTableName(resourceType);
+        string tableName = check utils:getTableName(resourceType);
         string primaryKey = utils:getPrimaryKeyColumn(resourceType);
 
         string sqlQuery = string `SELECT * FROM "${tableName}" WHERE "${primaryKey}" = '${utils:escapeSql(resourceId)}'`;
@@ -332,7 +332,7 @@ public class UpdateHandler {
             return error("JDBC client not initialized");
         }
 
-        string tableName = utils:getTableName(resourceType);
+        string tableName = check utils:getTableName(resourceType);
         string primaryKey = utils:getPrimaryKeyColumn(resourceType);
 
         string sqlQuery = string `SELECT "RESOURCE_JSON" FROM "${tableName}" WHERE "${primaryKey}" = '${utils:escapeSql(resourceId)}'`;
@@ -407,7 +407,7 @@ public class UpdateHandler {
             return error("JDBC client not initialized");
         }
 
-        string tableName = utils:getTableName(resourceType);
+        string tableName = check utils:getTableName(resourceType);
         string primaryKey = utils:getPrimaryKeyColumn(resourceType);
 
         // Build UPDATE SET clause dynamically from updateModel fields

@@ -29,7 +29,7 @@ public class CreateMapper {
             return error("JDBC client is required for generic column mapping");
         }
         
-        string tableName = mapperUtils:getTableName(resourceType);
+        string tableName = check mapperUtils:getTableName(resourceType);
         
         // Get actual column names from database schema
         string[] tableColumns = check mapperUtils:getTableColumns(jdbcConn, tableName);

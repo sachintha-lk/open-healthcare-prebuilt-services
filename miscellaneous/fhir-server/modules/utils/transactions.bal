@@ -166,7 +166,7 @@ public class TransactionHandler {
         }
 
         // Get table name and primary key
-        string tableName = getTableName(resourceType);
+        string tableName = check getTableName(resourceType);
         string primaryKeyColumn = getPrimaryKeyColumn(resourceType);
 
         // Build UPDATE SET clause dynamically from backup record

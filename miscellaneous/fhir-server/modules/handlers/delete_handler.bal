@@ -170,7 +170,7 @@ public class DeleteHandler {
             return error("JDBC client not initialized");
         }
 
-        string tableName = utils:getTableName(resourceType);
+        string tableName = check utils:getTableName(resourceType);
         string primaryKey = utils:getPrimaryKeyColumn(resourceType);
 
         string sqlQuery = string `SELECT * FROM "${tableName}" WHERE "${primaryKey}" = '${utils:escapeSql(resourceId)}'`;

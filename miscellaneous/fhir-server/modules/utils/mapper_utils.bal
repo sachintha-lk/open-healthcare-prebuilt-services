@@ -2,6 +2,7 @@ import ballerina/log;
 import ballerina/sql;
 import ballerina/time;
 import ballerinax/java.jdbc;
+import ballerinax/health.fhir.r4;
 
 // Database type configuration (shared from handlers module)
 public configurable string dbType = "h2";
@@ -20,7 +21,10 @@ isolated map<string[]> tableColumnsCache = {};
 
 // Helper function to convert resource type to table name
 // Example: "Appointment" -> "AppointmentTable" (matches the quoted table name in SQL)
-public isolated function getTableName(string resourceType) returns string {
+public isolated function getTableName(string resourceType) returns string|error {
+    if !r4:fhirRegistry.isSupportedResource(resourceType) {
+        return error(string `Unsupported resource type: ${resourceType}`);
+    }
     return resourceType + "Table";
 }
 
